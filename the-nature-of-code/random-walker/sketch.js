@@ -20,8 +20,8 @@ function Walker() {
 
   //random walk function
   this.walk = function() {
-    this.x += random(-1, 1);
-    this.y += random(-1, 1);
+    this.x += random(-5, 5);
+    this.y += random(-5, 5);
   }
 
   this.display = function() {

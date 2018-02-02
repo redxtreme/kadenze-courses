@@ -10,21 +10,22 @@ function setup() {
 // Animation loop
 function draw() {
   background(51);
-  w.walk();
+  w.update();
   w.display();
 }
 
 function Walker() {
-  this.pos = createVector(width / 2, height / 2);
+  this.pos = createVector(width / 2);
 
-  //random walk function
-  this.walk = function() {
+  //velocity
+  this.vel = createVector(0, 0);
 
-    //velocity
-    this.vel = createVector(random(-5, 5), random(-5, 5));
+  //acceleration
+  this.acc = createVector(0, 0.1);
 
-    //adjust the position vector
-    this.pos = this.pos.add(this.vel);
+  this.update = function() {
+    this.vel.add(this.acc);
+    this.pos.add(this.vel);
   }
 
   //draw walker

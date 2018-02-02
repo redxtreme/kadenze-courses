@@ -25,7 +25,7 @@ function Walker() {
 
     //Make a vector that goes from walker to the mouse
     this.acc = p5.Vector.sub(mouse, this.pos);
-    this.acc.normalize();
+    this.acc.normalize(2);
     this.acc.mult(0.01);
 
     this.vel.add(this.acc);

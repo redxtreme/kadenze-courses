@@ -19,8 +19,12 @@ function Walker() {
 
   //random walk function
   this.walk = function() {
-    this.pos.x += random(-5, 5);
-    this.pos.y += random(-5, 5);
+
+    //velocity
+    this.vel = createVector(random(-5, 5), random(-5, 5));
+
+    //adjust the position vector
+    this.pos = this.pos.add(this.vel);
   }
 
   //draw walker

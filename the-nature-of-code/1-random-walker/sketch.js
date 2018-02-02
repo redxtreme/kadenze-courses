@@ -15,15 +15,15 @@ function draw() {
 }
 
 function Walker() {
-  this.pos = createVector(width / 2);
+  this.pos = createVector(width / 2, height / 2);
 
   //velocity
   this.vel = createVector(0, 0);
 
-  //acceleration
-  this.acc = createVector(0, 0.1);
-
   this.update = function() {
+    //acceleration
+    this.acc = createVector(random(-1, 1), random(-1, 1));
+
     this.vel.add(this.acc);
     this.pos.add(this.vel);
   }

@@ -10,12 +10,19 @@ function setup() {
 // Animation loop
 function draw() {
   background(51);
+  w.walk();
   w.display();
 }
 
 function Walker() {
   this.x = width/2;
   this.y = height/2;
+
+  //random walk function
+  this.walk = function() {
+    this.x += random(-1, 1);
+    this.y += random(-1, 1);
+  }
 
   this.display = function() {
     fill(255);

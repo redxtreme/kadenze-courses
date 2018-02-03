@@ -1,7 +1,7 @@
-function Particle() {
-  this.pos = createVector(width/2, height/2);
-  this.vel = createVector(0,0);
-  this.acc = createVector(0,0);
+function Particle(x, y) {
+  this.pos = createVector(x, y);
+  this.vel = createVector(0, 0);
+  this.acc = createVector(0, 0);
 
   this.update = function() {
     this.vel.add(this.acc);

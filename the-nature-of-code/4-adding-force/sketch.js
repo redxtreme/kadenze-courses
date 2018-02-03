@@ -12,5 +12,6 @@ function draw() {
   particle.applyForce(gravity);
 
   particle.update();
+  particle.edges();
   particle.display();
 }

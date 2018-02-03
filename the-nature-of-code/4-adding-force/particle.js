@@ -16,4 +16,11 @@ function Particle() {
   this.applyForce = function(force) {
     this.acc = force
   }
+
+  this.edges = function() {
+    if (this.pos.y > height) {
+      this.vel.y *= -1;
+      this.pos.y = height;
+    }
+  }
 }

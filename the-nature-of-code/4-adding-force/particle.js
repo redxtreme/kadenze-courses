@@ -12,4 +12,8 @@ function Particle() {
     fill(255);
     ellipse(this.pos.x, this.pos.y, 48, 48);
   }
+
+  this.applyForce = function(force) {
+    this.acc = force
+  }
 }

@@ -7,6 +7,10 @@ function setup() {
 
 function draw() {
   background(51);
+
+  var gravity = createVector(0, 0.1);
+  particle.applyForce(gravity);
+
   particle.update();
   particle.display();
 }

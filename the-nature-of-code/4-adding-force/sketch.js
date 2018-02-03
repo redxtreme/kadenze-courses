@@ -2,19 +2,20 @@ var particle;
 
 function setup() {
   createCanvas(640, 360);
-  particle1 = new Particle(200, 100);
-  particle2 = new Particle(400, 100);
+  particle1 = new Particle(200, 100, 3);
+  particle2 = new Particle(400, 100, 1);
 }
 
 function draw() {
   background(51);
-
-  var gravity = createVector(0, 0.1);
   var wind = createVector(0.1, 0);
 
+  var gravity1 = createVector(0, 0.2 * particle1.mass);
+  var gravity2 = createVector(0, 0.2 * particle2.mass);
+
   // Apply forces
-  particle1.applyForce(gravity);
-  particle2.applyForce(gravity);
+  particle1.applyForce(gravity1);
+  particle2.applyForce(gravity2);
   if (mouseIsPressed) {
     particle1.applyForce(wind);
     particle2.applyForce(wind);

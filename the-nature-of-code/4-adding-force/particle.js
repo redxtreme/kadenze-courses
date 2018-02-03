@@ -1,7 +1,8 @@
-function Particle(x, y) {
+function Particle(x, y, m) {
   this.pos = createVector(x, y);
   this.vel = createVector(0, 0);
   this.acc = createVector(0, 0);
+  this.mass = m;
 
   this.update = function() {
     this.vel.add(this.acc);
@@ -13,12 +14,17 @@ function Particle(x, y) {
 
   this.display = function() {
     fill(255);
-    ellipse(this.pos.x, this.pos.y, 48, 48);
+    ellipse(this.pos.x, this.pos.y, this.mass * 10, this.mass * 10);
   }
 
   // Apply a given force
   this.applyForce = function(force) {
-    this.acc.add(force);
+
+    // Make a copy to protect original force
+    var f = force.copy();
+
+    f.div(this.mass);
+    this.acc.add(f);
   }
 
   // Respond to edge interactions

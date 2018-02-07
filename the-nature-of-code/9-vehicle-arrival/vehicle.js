@@ -4,7 +4,7 @@ function Vehicle(x, y, m) {
   this.acc = createVector(0, 0);
   this.maxSpeed = 5;
   this.maxForce = 0.2; // Turning agility
-  this.r = 5;
+  this.r = 4;
 
   this.update = function() {
     this.vel.add(this.acc);

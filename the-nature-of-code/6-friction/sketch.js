@@ -1,25 +1,48 @@
-var particle;
+var particle1;
+var particle2;
 
 function setup() {
   createCanvas(640, 360);
+
+  // Create liquid object
+  liquid = new Liquid(0, height / 2, width, height / 2, 0.1);
+
   particle1 = new Particle(200, 100, 3);
   particle2 = new Particle(400, 100, 1);
 }
 
 function draw() {
-  background(51);
-  var wind = createVector(0.1, 0);
+  background(127);
 
-  var gravity1 = createVector(0, 0.2 * particle1.mass);
-  var gravity2 = createVector(0, 0.2 * particle2.mass);
+  // Draw water
+  liquid.display();
+
+  // Is the Mover in the liquid?
+  if (liquid.contains(particle1)) {
+
+    // Calculate drag force
+    var dragForce = liquid.calculateDrag(particle1);
+
+    // Apply drag force to Mover
+    particle1.applyForce(dragForce);
+  }
+
+  // Is the Mover in the liquid?
+  if (liquid.contains(particle2)) {
+
+    // Calculate drag force
+    var dragForce = liquid.calculateDrag(particle2);
+
+    // Apply drag force to Mover
+    particle1.applyForce(dragForce);
+  }
+
+  var gravity1 = createVector(0, 0.1 * particle1.mass);
+  var gravity2 = createVector(0, 0.1 * particle2.mass);
 
   // Apply forces
   particle1.applyForce(gravity1);
   particle2.applyForce(gravity2);
-  if (mouseIsPressed) {
-    particle1.applyForce(wind);
-    particle2.applyForce(wind);
-  }
 
   particle1.update();
   particle1.edges();

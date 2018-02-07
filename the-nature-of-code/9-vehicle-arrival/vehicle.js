@@ -41,7 +41,7 @@ function Vehicle(x, y, m) {
     this.acc.add(f);
   };
 
-  this.seek = function(target) {
+  this.arrive = function(target) {
     var desired = p5.Vector.sub(target, this.pos);
     desired.setMag(this.maxSpeed);
 
@@ -51,32 +51,4 @@ function Vehicle(x, y, m) {
 
     this.applyForce(steering);
   };
-
-  // // Respond to edge interactions
-  // this.edges = function() {
-  //
-  //   // Floor
-  //   if (this.pos.y > height) {
-  //     this.vel.y *= -1;
-  //     this.pos.y = height;
-  //   }
-  //
-  //   // Right wall
-  //   else if(this.pos.x > width) {
-  //     this.vel.x *= -1;
-  //     this.pos.x = width;
-  //   }
-  //
-  //   // Ceiling
-  //   else if(this.pos.y < 0) {
-  //     this.vel.y *= -1;
-  //     this.pos.y = 0;
-  //   }
-  //
-  //   // Left wall
-  //   else if(this.pos.x < 0) {
-  //     this.vel.x *= -1;
-  //     this.pos.x = 0;
-  //   }
-  // }
 }

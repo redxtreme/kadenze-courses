@@ -1,25 +1,15 @@
-var rows;
-var cols;
-var w;
-var h;
+var vehicle;
 
 // Setup function required by p5
 function setup() {
-  createCanvas(400, 400);
-  console.log('Project Started');
-
-  // Drawing area
-  w = width / cols;
-  h = height / rows;
-
-  // Create a two dimentional Array
-  for (var i = 0; i < cols; i++) {
-    grid[i] = new Array(rows);
-  }
-
+  createCanvas(640, 360);
+  vehicle = new Vehicle(320, 180);
 }
 
 // Animation loop
 function draw() {
-  background(200);
+  background(51);
+
+  vehicle.update();
+  vehicle.display();
 }

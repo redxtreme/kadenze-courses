@@ -1,10 +1,3 @@
-// Daniel Shiffman
-// https://www.kadenze.com/courses/the-nature-of-code
-// http://natureofcode.com/
-// Session 3: Separation
-
-// The "Vehicle" constructor
-
 function Vehicle(x, y) {
   // All the usual stuff
   this.position = createVector(x, y);
@@ -19,10 +12,34 @@ function Vehicle(x, y) {
     this.acceleration.add(force);
   }
 
+  this.applyBehaviors = function(vehicles) {
+    var separateForce = this.separate(vehicles);
+    var seekForce = this.seek(createVector(mouseX, mouseY));
+
+    separateForce.mult(1);
+    seekForce.mult(1);
+
+    this.applyForce(separateForce);
+    this.applyForce(seekForce);
+  }
+
+  // A method that calculates a steering force towards a target
+  this.seek = function(target) {
+    var desired = p5.Vector.sub(target, this.position); // A vector pointing from the location to the target
+
+    // Normalize desired and scale to maximum speed
+    desired.mag(this.maxspeed);
+    
+    // Steering = Desired minus velocity
+    var steer = p5.Vector.sub(desired, this.velocity);
+    steer.limit(this.maxforce); // Limit to maximum steering force
+    return steer;
+}
+
   // Separation
   // Method checks for nearby vehicles and steers away
   this.separate = function(vehicles) {
-    var desiredseparation = this.r * 2;
+    var desiredseparation = 20;
     var sum = createVector();
     var count = 0;
     // For every boid in the system, check if it's too close
@@ -45,11 +62,11 @@ function Vehicle(x, y) {
       sum.normalize();
       sum.mult(this.maxspeed);
       // Implement Reynolds: Steering = Desired - Velocity
-      var steer = p5.Vector.sub(sum, this.velocity);
-      steer.limit(this.maxforce);
-      this.applyForce(steer);
+      sum.sub(this.velocity);
+      sum.limit(this.maxforce);
     }
-  }
+    return sum;
+}
 
   // Method to update location
   this.update = function() {

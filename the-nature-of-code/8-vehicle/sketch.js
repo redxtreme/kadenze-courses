@@ -10,6 +10,11 @@ function setup() {
 function draw() {
   background(51);
 
+  var target = createVector(mouseX, mouseY);
+
+  // Action Selection
+  vehicle.seek(target);
+
   vehicle.update();
   vehicle.display();
 }

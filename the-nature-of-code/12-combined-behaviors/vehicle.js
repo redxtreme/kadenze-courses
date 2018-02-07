@@ -16,8 +16,8 @@ function Vehicle(x, y) {
     var separateForce = this.separate(vehicles);
     var seekForce = this.seek(createVector(mouseX, mouseY));
 
-    separateForce.mult(1);
-    seekForce.mult(1);
+    separateForce.mult(slider1.value());
+    seekForce.mult(slider2.value());
 
     this.applyForce(separateForce);
     this.applyForce(seekForce);
@@ -29,7 +29,7 @@ function Vehicle(x, y) {
 
     // Normalize desired and scale to maximum speed
     desired.mag(this.maxspeed);
-    
+
     // Steering = Desired minus velocity
     var steer = p5.Vector.sub(desired, this.velocity);
     steer.limit(this.maxforce); // Limit to maximum steering force

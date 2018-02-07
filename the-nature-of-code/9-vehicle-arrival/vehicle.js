@@ -43,7 +43,20 @@ function Vehicle(x, y, m) {
 
   this.arrive = function(target) {
     var desired = p5.Vector.sub(target, this.pos);
-    desired.setMag(this.maxSpeed);
+
+    // The arrive behavior!
+    var d = desired.mag();
+
+    // If we are getting really close to the target
+    if (d < 100) {
+
+      // Map the desired magnitude according to distance
+      // This maps the values to a new scale
+      var m = map(d, 0, 100, 0, this.maxSpeed);
+      desired.setMag(m);
+    } else {
+      desired.setMag(this.maxSpeed);
+    }
 
     // Craig Reynolds: Steering = desired - velocity
     var steering = p5.Vector.sub(desired, this.vel);

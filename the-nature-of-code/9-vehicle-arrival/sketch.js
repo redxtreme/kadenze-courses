@@ -13,7 +13,7 @@ function draw() {
   var target = createVector(mouseX, mouseY);
 
   // Action Selection
-  vehicle.seek(target);
+  vehicle.arrive(target);
 
   vehicle.update();
   vehicle.display();

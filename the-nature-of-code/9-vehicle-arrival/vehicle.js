@@ -31,7 +31,6 @@ function Vehicle(x, y, m) {
     vertex(this.r, this.r * 2);
     endShape(CLOSE);
     pop();
-    console.log(this.r);
   };
 
   // Apply a given force

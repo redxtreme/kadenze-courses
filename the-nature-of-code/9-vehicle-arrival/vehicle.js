@@ -4,6 +4,7 @@ function Vehicle(x, y, m) {
   this.acc = createVector(0, 0);
   this.maxSpeed = 5;
   this.maxForce = 0.2; // Turning agility
+  this.r = 5;
 
   this.update = function() {
     this.vel.add(this.acc);
@@ -15,8 +16,22 @@ function Vehicle(x, y, m) {
   };
 
   this.display = function() {
-    fill(255, 150);
-    ellipse(this.pos.x, this.pos.y, 48, 48);
+
+    // Draw a triangle rotated in the direction of velocity
+    var theta = this.vel.heading() + PI / 2;
+    fill(127);
+    stroke(200);
+    strokeWeight(1);
+    push();
+    translate(this.pos.x, this.pos.y);
+    rotate(theta);
+    beginShape();
+    vertex(0, -this.r * 2);
+    vertex(-this.r, this.r * 2);
+    vertex(this.r, this.r * 2);
+    endShape(CLOSE);
+    pop();
+    console.log(this.r);
   };
 
   // Apply a given force

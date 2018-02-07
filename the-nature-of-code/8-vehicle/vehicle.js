@@ -3,9 +3,11 @@ function Vehicle(x, y, m) {
   this.vel = createVector(0, 0);
   this.acc = createVector(0, 0);
   this.maxSpeed = 5;
+  this.maxForce = 0.2; // Turning agility
 
   this.update = function() {
     this.vel.add(this.acc);
+    this.vel.limit(this.maxSpeed);
     this.pos.add(this.vel);
 
     // Reset forces
@@ -29,8 +31,9 @@ function Vehicle(x, y, m) {
     var desired = p5.Vector.sub(target, this.pos);
     desired.setMag(this.maxSpeed);
 
-    // Craig Renolds: Steering = desired - velocity
+    // Craig Reynolds: Steering = desired - velocity
     var steering = p5.Vector.sub(desired, this.vel);
+    steering.limit(this.maxForce);
 
     this.applyForce(steering);
   };

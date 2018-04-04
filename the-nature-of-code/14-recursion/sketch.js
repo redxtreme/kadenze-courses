@@ -10,5 +10,10 @@ function draw() {
   stroke(255);
   noFill();
 
-  ellipse(width/2, height/2, 300, 300);
+  drawCircle(width/2, height/2, 300)
+}
+
+function drawCircle(x, y, d) {
+  ellipse(x, y, d, d);
+
 }

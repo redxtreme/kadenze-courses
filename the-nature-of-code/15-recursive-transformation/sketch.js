@@ -13,28 +13,30 @@ function draw() {
   //Start tree from the bottom
   translate(width/2, height);
   stroke(255);
-  branch(120);
+  branch(120, 1);
 }
 
-function branch(len) {
+function branch(len, generation) {
   //Draw branch
-  strokeWeight(2);
+  strokeWeight(map(generation, 1, 10, 10, 1));
   line(0,0,0,-len);
 
   //Move to the end and shrink
   translate(0, -len);
   len *= 0.66;
 
+  generation++;
+
   if (len > 2) {
     push();
     rotate(angle);
-    branch(len);
+    branch(len, generation);
     pop();
 
     //Repeat the same thing, only branch off to the left this time
     push();
     rotate(-angle);
-    branch(len);
+    branch(len, generation);
     pop();
   }
 }

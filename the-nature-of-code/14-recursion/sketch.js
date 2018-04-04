@@ -5,5 +5,10 @@ function setup() {
 
 // Animation loop
 function draw() {
-  background(200);
+  background(51);
+
+  stroke(255);
+  noFill();
+
+  ellipse(width/2, height/2, 300, 300);
 }

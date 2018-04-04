@@ -16,4 +16,6 @@ function draw() {
 function drawCircle(x, y, d) {
   ellipse(x, y, d, d);
 
+  if (d > 10)
+    drawCircle(x, y, d/2);
 }

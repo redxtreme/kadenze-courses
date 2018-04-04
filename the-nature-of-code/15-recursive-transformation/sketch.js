@@ -8,7 +8,7 @@ function draw() {
   background(51);
 
   //Pick an angle from 0 - 90 degrees
-  angle = PI / 4;
+  angle = map(mouseX, 0, width, 0, PI / 2);
 
   //Start tree from the bottom
   translate(width/2, height);

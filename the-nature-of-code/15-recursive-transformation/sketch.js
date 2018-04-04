@@ -7,22 +7,34 @@ function setup() {
 function draw() {
   background(51);
 
-  stroke(255);
-  noFill();
+  //Pick an angle from 0 - 90 degrees
+  angle = PI / 4;
 
-  cantor(200, 100, 300)
+  //Start tree from the bottom
+  translate(width/2, height);
+  stroke(255);
+  branch(120);
 }
 
-function cantor(x, y, len) {
-  var h = 30;
+function branch(len) {
+  //Draw branch
+  strokeWeight(2);
+  line(0,0,0,-len);
 
-  if (len >= 1) {
-    stroke(255);
-    strokeWeight;
-    line(x, y, x+len, y);
-    y += h;
+  //Move to the end and shrink
+  translate(0, -len);
+  len *= 0.66;
 
-    cantor(x, y, len/3);
-    cantor(x + len*2/3, y, len/3);
+  if (len > 2) {
+    push();
+    rotate(angle);
+    branch(len);
+    pop();
+
+    //Repeat the same thing, only branch off to the left this time
+    push();
+    rotate(-angle);
+    branch(len);
+    pop();
   }
 }

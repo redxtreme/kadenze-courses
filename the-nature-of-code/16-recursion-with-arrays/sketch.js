@@ -1,42 +1,35 @@
+var tree = [];
+var leaves = [];
+
 // Setup function required by p5
 function setup() {
   createCanvas(640, 360);
+  var b = new Branch(createVector(width / 2,
+    height), createVector(0, -1), 100);
+  tree.push(b);
 }
 
 // Animation loop
 function draw() {
-  background(51);
+  background(255);
 
-  //Pick an angle from 0 - 90 degrees
-  angle = map(mouseX, 0, width, 0, PI / 2);
+  for (var i = 0; i < tree.length; i++) {
+    //Get the branch, update and draw it
+    tree[i].update();
+    tree[i].render();
 
-  //Start tree from the bottom
-  translate(width/2, height);
-  stroke(255);
-  branch(120, 1);
-}
-
-function branch(len, generation) {
-  //Draw branch
-  strokeWeight(map(generation, 1, 10, 10, 1));
-  line(0,0,0,-len);
-
-  //Move to the end and shrink
-  translate(0, -len);
-  len *= 0.66;
-
-  generation++;
-
-  if (len > 2) {
-    push();
-    rotate(angle);
-    branch(len, generation);
-    pop();
-
-    //Repeat the same thing, only branch off to the left this time
-    push();
-    rotate(-angle);
-    branch(len, generation);
-    pop();
+    if (tree[i].timeToBranch()) {
+      if (tree.length < 1024) {
+        tree.push(tree[i].branch(30)); //Add one going x degrees to the right
+        tree.push(tree[i].branch(-25)); //Add one going left
+      } else {
+        leaves.push(new Leaf(tree[i].end));
+      }
+    }
   }
+
+  for (var i=0; i < leaves.length; i++) {
+    leaves[i].display();
+  }
+
 }
